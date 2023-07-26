@@ -16,9 +16,13 @@ namespace Berger.Extensions.Authentication
 
             return new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
         }
+
+        
         public SymmetricSecurityKey CreateSymmetricSecurityKey(string secret)
         {
-            return new SymmetricSecurityKey(secret.ToByteArray());
+            var bytes = Encoding.ASCII.GetBytes(secret);
+
+            return new SymmetricSecurityKey(bytes);
         }
         public static ClaimsIdentity CreateClaims(string name, string email, string role)
         {
