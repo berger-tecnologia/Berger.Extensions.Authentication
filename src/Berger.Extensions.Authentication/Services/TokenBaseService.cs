@@ -16,7 +16,6 @@ namespace Berger.Extensions.Authentication
 
             return new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
         }
-
         
         public SymmetricSecurityKey CreateSymmetricSecurityKey(string secret)
         {
