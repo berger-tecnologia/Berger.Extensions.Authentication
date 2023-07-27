@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace Berger.Extensions.Authentication
+namespace Berger.Extensions.Jwt
 {
     public static class ClaimHelper
     {

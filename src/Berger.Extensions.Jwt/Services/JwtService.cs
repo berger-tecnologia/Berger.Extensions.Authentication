@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 
-namespace Berger.Extensions.Authentication
+namespace Berger.Extensions.Jwt
 {
     public class JwtService : IJwtService
     {

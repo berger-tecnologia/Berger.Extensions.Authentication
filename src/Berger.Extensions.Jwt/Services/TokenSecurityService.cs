@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 
-namespace Berger.Extensions.Authentication
+namespace Berger.Extensions.Jwt
 {
     public class TokenSecurityService : TokenBaseService, ITokenService<SecurityTokenDescriptor>
     {

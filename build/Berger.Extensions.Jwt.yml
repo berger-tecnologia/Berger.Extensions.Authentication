@@ -10,7 +10,7 @@ resources:
     ref: refs/heads/dev
 jobs:
 - job: Job_1
-  displayName: Berger.Extensions.Authentication-Agent
+  displayName: Berger.Extensions.Jwt-Agent
   pool:
     vmImage: windows-latest
   steps:
@@ -40,5 +40,5 @@ jobs:
     inputs:
       command: push
       nuGetFeedType: external
-      publishFeedCredentials: 'berger.extensions.authentication-nuget'
+      publishFeedCredentials: 'berger.extensions.nuget'
 ...

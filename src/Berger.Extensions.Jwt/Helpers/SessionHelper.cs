@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 
-namespace Berger.Extensions.Authentication
+namespace Berger.Extensions.Jwt
 {
     public static class SessionHelper
     {
