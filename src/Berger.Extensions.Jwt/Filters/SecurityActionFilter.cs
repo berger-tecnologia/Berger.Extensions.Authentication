@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Berger.Extensions.Authentication
+namespace Berger.Extensions.Jwt
 {
     public class SecurityActionFilter : ActionFilterAttribute
     {

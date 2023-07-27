@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Builder;
 
-namespace Berger.Extensions.Authentication
+namespace Berger.Extensions.Jwt
 {
     public static class ResponseConfiguration
     {

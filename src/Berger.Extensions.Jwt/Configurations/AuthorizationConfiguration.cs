@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 
-namespace Berger.Extensions.Authentication
+namespace Berger.Extensions.Jwt
 {
     public static class AuthorizationConfiguration
     {
