@@ -1,1 +1,1 @@
-# Berger.Extensions.Authentication
+# Berger.Extensions.Jwt
