@@ -5,10 +5,6 @@ namespace Berger.Extensions.Jwt
 {
     public class SecurityActionFilter : ActionFilterAttribute
     {
-        #region Properties
-        private readonly ISessionService _session;
-        #endregion
-
         #region Constructors
         public SecurityActionFilter()
         {
@@ -18,7 +14,7 @@ namespace Berger.Extensions.Jwt
         #region Events
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            Controller controller = context.Controller as Controller;
+            _ = context.Controller as Controller;
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
