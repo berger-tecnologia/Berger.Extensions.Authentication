@@ -36,10 +36,10 @@ namespace Berger.Extensions.Jwt
         {
             return new TokenValidationParameters
             {
+                ClockSkew = TimeSpan.Zero,
                 ValidateIssuer = checkIssuer,
                 ValidateAudience = checkAudience,
                 ValidateLifetime = checkLifetime,
-                ClockSkew = TimeSpan.Zero,
                 ValidateIssuerSigningKey = checkIssuerSigningKey
             };
         }

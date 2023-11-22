@@ -16,7 +16,6 @@ namespace Berger.Extensions.Jwt
         {
             _ = context.Controller as Controller;
         }
-
         public override void OnActionExecuted(ActionExecutedContext context)
         {
         }

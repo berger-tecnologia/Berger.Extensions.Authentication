@@ -13,15 +13,15 @@ namespace Berger.Extensions.Jwt
         }
         private JwtSecurityToken CreateToken(IConfiguration configuration, string email, string role)
         {
-            var jwt = configuration.GetSection("Jwt").Get<JwtSpecification>();
+            var jwt = configuration.GetSection(Specifications.Jwt).Get<JwtSpecification>();
 
             var service = new TokenSecurityService();
 
-            service.SetSubject(email, role);
             service.SetIssuer(jwt.Issuer);
+            service.SetSubject(email, role);
             service.SetAudience(jwt.Audience);
-            service.SetExpiration(jwt.Expiration);
             service.SetCredential(jwt.Secret);
+            service.SetExpiration(jwt.Expiration);
 
             var handler = new JwtSecurityTokenHandler();
 

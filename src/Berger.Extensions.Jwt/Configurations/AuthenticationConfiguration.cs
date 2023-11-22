@@ -9,9 +9,6 @@ namespace Berger.Extensions.Jwt
             // Jwt Service
             services.AddScoped<IJwtService, JwtService>();
 
-            // Session Service
-            services.AddScoped<ISessionService, SessionService>();
-
             return services;
         }
     }

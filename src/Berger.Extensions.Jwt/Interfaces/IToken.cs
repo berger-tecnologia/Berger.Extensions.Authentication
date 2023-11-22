@@ -1,6 +1,6 @@
 ﻿namespace Berger.Extensions.Jwt
 {
-    public interface ITokenService<T> where T : class
+    public interface IToken<T> where T : class
     {
         public T Get();
         public void SetCredential(string secret);

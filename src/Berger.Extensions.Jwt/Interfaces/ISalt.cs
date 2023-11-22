@@ -1,6 +1,6 @@
 ﻿namespace Berger.Extensions.Jwt
 {
-    public interface ISaltService
+    public interface ISalt
     {
         string Create();
     }

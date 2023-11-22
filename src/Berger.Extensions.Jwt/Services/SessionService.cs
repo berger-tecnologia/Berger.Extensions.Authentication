@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Berger.Extensions.Abstractions;
 using Microsoft.AspNetCore.Http.Features;
 
 namespace Berger.Extensions.Jwt

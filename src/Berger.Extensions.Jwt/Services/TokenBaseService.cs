@@ -15,8 +15,7 @@ namespace Berger.Extensions.Jwt
             var key = CreateSymmetricSecurityKey(secret);
 
             return new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
-        }
-        
+        }        
         public SymmetricSecurityKey CreateSymmetricSecurityKey(string secret)
         {
             var bytes = Encoding.ASCII.GetBytes(secret);

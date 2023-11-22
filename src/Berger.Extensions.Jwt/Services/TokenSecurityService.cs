@@ -2,7 +2,7 @@
 
 namespace Berger.Extensions.Jwt
 {
-    public class TokenSecurityService : TokenBaseService, ITokenService<SecurityTokenDescriptor>
+    public class TokenSecurityService : TokenBaseService, IToken<SecurityTokenDescriptor>
     {
         #region Properties
         private SecurityTokenDescriptor Descriptor { get; set; }
@@ -34,7 +34,7 @@ namespace Berger.Extensions.Jwt
         }
         public void SetSubject(string email, string role)
         {
-            Descriptor.Subject = CreateClaims("User", email, role);
+            Descriptor.Subject = CreateClaims(Claims.User, email, role);
         }
         public void SetExpiration(int expiration)
         {
