@@ -1,6 +1,6 @@
 ﻿namespace Berger.Extensions.Jwt
 {
-    public class JwtSpecification
+    public class JwtConfig
     {
         public int Expiration { get; init; } = 0;
         public string Issuer { get; set; } = string.Empty;

@@ -34,7 +34,7 @@ namespace Berger.Extensions.Jwt
         }
         public void SetSubject(string email, string role)
         {
-            Descriptor.Subject = CreateClaims(Claims.User, email, role);
+            Descriptor.Subject = CreateClaims("User", email, role);
         }
         public void SetExpiration(int expiration)
         {

@@ -19,7 +19,6 @@ namespace Berger.Extensions.Jwt
                     var request = context.Request;
                     var response = context.Response;
 
-                    // Log the complete request details
                     logger.LogInformation($"Request Information: \n" +
                                           $"Schema:{request.Scheme} \n" +
                                           $"Host: {request.Host} \n" +
@@ -27,13 +26,12 @@ namespace Berger.Extensions.Jwt
                                           $"QueryString: {request.QueryString} \n" +
                                           $"Response Status Code: {response.StatusCode}");
 
-                    //// Custom handling for specific status codes
-                    //if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
-                    //    response.Redirect("/accounts/signin");
-                    //else if (response.StatusCode == (int)HttpStatusCode.Forbidden)
-                    //    response.Redirect("/accounts/forbidden");
-                    //else if (response.StatusCode == (int)HttpStatusCode.NotFound)
-                    //    response.Redirect("/notfound");
+                    if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
+                        response.Redirect("/accounts/signin");
+                    else if (response.StatusCode == (int)HttpStatusCode.Forbidden)
+                        response.Redirect("/accounts/forbidden");
+                    else if (response.StatusCode == (int)HttpStatusCode.NotFound)
+                        response.Redirect("/notfound");
                 }
             });
         }

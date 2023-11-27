@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Security.Claims;
 
 namespace Berger.Extensions.Jwt
 {
     public interface IJwtService
     {
-        string Issue(IConfiguration configuration, string email, string role);
+        Token Issue();
+        string Issue(List<Claim> claims, JwtConfig config);
+        string RefreshToken(string expiredToken, string refreshToken, JwtConfig config);
     }
 }

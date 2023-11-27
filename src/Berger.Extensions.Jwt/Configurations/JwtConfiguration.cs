@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Berger.Extensions.Abstractions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,10 +14,21 @@ namespace Berger.Extensions.Jwt
                 .Configure(configuration)
                 .ConfigureAuthorization();
         }
-
         private static IServiceCollection Configure(this IServiceCollection services, IConfiguration configuration)
         {
-            var jwt = configuration.GetSection("Jwt").Get<JwtSpecification>();
+            var jwt = configuration.GetSection("Jwt").Get<JwtConfig>();
+
+            if (jwt is null)
+                throw new ArgumentNullException(nameof(jwt));
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = jwt.Issuer;
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromHours(12);
+
+                // TODO: Adicionar Timespan no config.
+            });
 
             var validator = new TokenValidationService();
 
@@ -28,9 +40,9 @@ namespace Berger.Extensions.Jwt
             (
                 e =>
                 {
-                    e.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    e.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                     //e.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    e.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    e.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 })
                 .AddJwtBearer(e =>
                 {
@@ -47,7 +59,7 @@ namespace Berger.Extensions.Jwt
         {
             services.AddAuthorization(auth =>
             {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                auth.AddPolicy(Standards.Bearer, new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
                     .RequireAuthenticatedUser()
                     .Build());

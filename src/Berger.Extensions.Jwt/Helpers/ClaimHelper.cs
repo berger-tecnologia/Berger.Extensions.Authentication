@@ -24,9 +24,9 @@ namespace Berger.Extensions.Jwt
         }
         public static bool IsAutenticated(this ClaimsPrincipal claims)
         {
-            var userID = claims.Get(ClaimTypes.Sid) ?? Guid.Empty;
+            var userId = claims.Get(ClaimTypes.Sid) ?? Guid.Empty;
 
-            return userID != Guid.Empty;
+            return userId != Guid.Empty;
         }
         public static bool IsInGroup(this ClaimsPrincipal claims)
         {

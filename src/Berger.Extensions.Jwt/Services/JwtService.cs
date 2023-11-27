@@ -1,31 +1,63 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using Microsoft.Extensions.Configuration;
+﻿using System.Text;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Berger.Extensions.Jwt
 {
     public class JwtService : IJwtService
     {
-        public string Issue(IConfiguration configuration, string email, string role)
+        public string Issue(List<Claim> claims, JwtConfig config)
         {
-            var token = CreateToken(configuration, email, role);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(config.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddMinutes(config.Expiration),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
-        private JwtSecurityToken CreateToken(IConfiguration configuration, string email, string role)
+        public Token Issue()
         {
-            var jwt = configuration.GetSection(Specifications.Jwt).Get<JwtSpecification>();
+            throw new NotImplementedException();
+        }
+        public string RefreshToken(string expiredToken, string refreshToken, JwtConfig config)
+        {
+            var principal = GetPrincipalFromExpiredToken(expiredToken, config);
 
-            var service = new TokenSecurityService();
+            return Issue(new List<Claim>(), config);
+        }
+        private ClaimsPrincipal GetPrincipalFromExpiredToken(string token, JwtConfig config)
+        {
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config.Secret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = false
+            };
 
-            service.SetIssuer(jwt.Issuer);
-            service.SetSubject(email, role);
-            service.SetAudience(jwt.Audience);
-            service.SetCredential(jwt.Secret);
-            service.SetExpiration(jwt.Expiration);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
 
-            var handler = new JwtSecurityTokenHandler();
-
-            return handler.CreateToken(service.Get()) as JwtSecurityToken;
+                if (!(securityToken is JwtSecurityToken jwtSecurityToken) || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    throw new SecurityTokenException("Invalid token");
+                }
+                return principal;
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

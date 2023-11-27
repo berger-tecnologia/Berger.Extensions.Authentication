@@ -55,7 +55,7 @@ namespace Berger.Extensions.Jwt
         {
             var ip = GetIp();
 
-            _acessor.HttpContext.Session.Remove("Token");
+            _acessor.HttpContext.Session.Remove(Standards.Token);
         }
     }
 }
