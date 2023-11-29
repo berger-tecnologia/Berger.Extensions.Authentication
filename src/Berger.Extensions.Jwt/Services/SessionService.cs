@@ -57,5 +57,29 @@ namespace Berger.Extensions.Jwt
 
             _acessor.HttpContext.Session.Remove(Standards.Token);
         }
+        private async Task<bool> CheckIp(Guid sessionId, string ip)
+        {
+            //if (session.IpAddress != ip && session.IpAddress != "::1")
+            //{
+            //    await Revoke(session);
+
+            //    return false;
+            //}
+
+            return true;
+        }
+        private async Task Revoke(Guid id)
+        {
+            //session.Revoke();
+            //await UpdateAsync(session);
+            //return session;
+        }
+        public async Task<bool> Check(string ip, string token)
+        {
+            //var session = _repository.FirstOrDefault(e => e.Token == token);
+
+            //return await Check(session, ip);
+            return true;
+        }
     }
 }
