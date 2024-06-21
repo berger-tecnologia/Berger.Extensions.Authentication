@@ -28,10 +28,16 @@ namespace Berger.Extensions.Jwt
 
                     if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
                         response.Redirect("/accounts/signin");
+
                     else if (response.StatusCode == (int)HttpStatusCode.Forbidden)
                         response.Redirect("/accounts/forbidden");
-                    else if (response.StatusCode == (int)HttpStatusCode.NotFound)
+
+                    else if (response.StatusCode == (int)HttpStatusCode.NotFound && !request.Path.Value.Equals("/notfound", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var a = request;
+                        var b = response;
                         response.Redirect("/notfound");
+                    }
                 }
             });
         }
