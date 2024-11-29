@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Berger.Extensions.Jwt
 {
-    public class SessionService : ISessionService
+    public class HttpSessionService : IHttpSessionService
     {
         private readonly IHttpContextAccessor _acessor;
-        public SessionService(IHttpContextAccessor acessor)
+        public HttpSessionService(IHttpContextAccessor acessor)
         {
             this._acessor = acessor ?? throw new ArgumentNullException(nameof(acessor));
         }

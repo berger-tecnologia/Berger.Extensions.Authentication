@@ -6,11 +6,11 @@ namespace Berger.Extensions.Jwt
     {
         public static Guid? Get(this ClaimsPrincipal claims, string claimType)
         {
-            var element = claims.FindFirst(claimType);
+            var asset = claims.FindFirst(claimType);
 
-            if (element is not null)
+            if (asset is not null)
             {
-                if (Guid.TryParse(element.Value, out Guid id))
+                if (Guid.TryParse(asset.Value, out Guid id))
                     return id;
             }
 

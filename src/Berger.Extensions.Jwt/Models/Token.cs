@@ -5,10 +5,10 @@ namespace Berger.Extensions.Jwt
     public class Token : BaseEntity
     {
         public Guid ApplicationId { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Issuer { get; set; } = string.Empty;
-        public string AccessToken { get; set; } = string.Empty;
-        public string RefreshToken { get; set; } = string.Empty;
+        public string Name { get; set; }
+        public string Issuer { get; set; }
+        public string AccessToken { get; set; }
+        public string RefreshToken { get; set; }
         public DateTime ExpiresOn { get; set; }
     }
 }
