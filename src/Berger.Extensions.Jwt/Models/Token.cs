@@ -6,6 +6,7 @@ namespace Berger.Extensions.Jwt
     {
         public Guid ApplicationId { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
         public string Issuer { get; set; }
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
