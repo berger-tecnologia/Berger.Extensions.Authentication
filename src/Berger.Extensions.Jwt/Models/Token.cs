@@ -5,6 +5,7 @@ namespace Berger.Extensions.Jwt
     public class Token : BaseEntity
     {
         public Guid ApplicationId { get; set; }
+        public Guid ChannelId { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Issuer { get; set; }
